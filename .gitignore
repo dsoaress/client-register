@@ -1,0 +1,20 @@
+# Logs
+logs
+*.log
+.pnpm-debug.log*
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variable files
+.env
+
+# Build output
+dist
+
+# OS files
+.DS_Store

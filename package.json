@@ -1,0 +1,15 @@
+{
+  "name": "user-register",
+  "version": "0.0.0",
+  "author": "Daniel Soares <daniel.soares@me.com>",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.12.1"
+}

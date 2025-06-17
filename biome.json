@@ -1,0 +1,56 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!node_modules/**/*", "!dist/**/*", "!coverage/**/*"]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "lineWidth": 100
+  },
+  "linter": {
+    "includes": ["**/*.ts", "**/*.js", "**/*.json"],
+    "enabled": true,
+    "rules": {
+      "style": {
+        "useFragmentSyntax": "error",
+        "noDoneCallback": "error",
+        "useExplicitLengthCheck": "error",
+        "useForOf": "error",
+        "useConsistentArrayType": {
+          "level": "error",
+          "options": {
+            "syntax": "shorthand"
+          }
+        }
+      },
+      "correctness": {
+        "useHookAtTopLevel": "error",
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "error"
+      },
+      "suspicious": {
+        "noSkippedTests": "error",
+        "noMisplacedAssertion": "error",
+        "useErrorMessage": "error"
+      },
+      "nursery": {
+        "useExplicitType": "error",
+        "useSortedClasses": "error"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "trailingCommas": "none",
+      "semicolons": "asNeeded",
+      "arrowParentheses": "asNeeded",
+      "quoteStyle": "single"
+    }
+  }
+}

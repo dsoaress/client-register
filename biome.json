@@ -40,7 +40,6 @@
         "useErrorMessage": "error"
       },
       "nursery": {
-        "useExplicitType": "error",
         "useSortedClasses": "error"
       }
     }

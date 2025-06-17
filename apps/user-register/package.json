@@ -1,0 +1,22 @@
+{
+  "name": "user-register",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/main.ts",
+    "build": "tsc && tsup",
+    "start": "node dist/main.js",
+    "clear": "rimraf dist"
+  },
+  "dependencies": {
+    "express": "5.1.0",
+    "core": "workspace:core@*"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.3",
+    "@types/node": "24.0.3",
+    "tsup": "8.5.0",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3"
+  }
+}

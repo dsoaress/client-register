@@ -1,4 +1,4 @@
-import { BadRequestException, NotFoundException } from 'core'
+import { ConflictException, NotFoundException } from 'core'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { clientFake } from '../../utils/tests/fakes/client.fake'
 import { InMemoryClientRepository } from '../../utils/tests/in-memory-repositories/in-memory-client.repository'
@@ -43,7 +43,7 @@ describe('UpdateClientUseCase', () => {
     const client2 = clientFake({ id: undefined, email: emailClient2 })
     await Promise.all([clientRepository.create(client1), clientRepository.create(client2)])
     const input = { id: client1.id, email: emailClient2 }
-    await expect(updateClientUseCase.execute(input)).rejects.toThrowError(BadRequestException)
+    await expect(updateClientUseCase.execute(input)).rejects.toThrowError(ConflictException)
   })
 
   it('should throw BadRequestException for already existing client phone', async () => {
@@ -53,6 +53,6 @@ describe('UpdateClientUseCase', () => {
     const client2 = clientFake({ id: undefined, phone: phoneClient2 })
     await Promise.all([clientRepository.create(client1), clientRepository.create(client2)])
     const input = { id: client1.id, phone: phoneClient2 }
-    await expect(updateClientUseCase.execute(input)).rejects.toThrowError(BadRequestException)
+    await expect(updateClientUseCase.execute(input)).rejects.toThrowError(ConflictException)
   })
 })

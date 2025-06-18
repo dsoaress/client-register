@@ -1,4 +1,4 @@
-import { BadRequestException, NotFoundException, type UseCase } from 'core'
+import { ConflictException, NotFoundException, type UseCase } from 'core'
 
 import type { ClientEntity } from '../../domain/entities/client.entity'
 import type { UpdateClientInputDTO } from '../dtos/update-client-input.dto'
@@ -27,13 +27,13 @@ export class UpdateClientUseCase implements UseCase<UpdateClientInputDTO, void> 
     if (!email) return
     const client = await this.clientRepository.findByEmail(email)
     if (client && client.id !== id)
-      throw new BadRequestException(`Client with email ${email} already exists`)
+      throw new ConflictException(`Client with email ${email} already exists`)
   }
 
   private async validateAlreadyExistsPhone(id: string, phone?: string): Promise<void> {
     if (!phone) return
     const client = await this.clientRepository.findByPhone(phone)
     if (client && client.id !== id)
-      throw new BadRequestException(`Client with phone ${phone} already exists`)
+      throw new ConflictException(`Client with phone ${phone} already exists`)
   }
 }

@@ -35,13 +35,13 @@ export class InMemoryClientRepository implements ClientRepository {
     return { data: paginatedClients, total }
   }
 
-  async create(Entity: ClientEntity): Promise<void> {
-    this._clients.push(Entity)
+  async create(entity: ClientEntity): Promise<void> {
+    this._clients.push(entity)
   }
 
-  async update(Entity: ClientEntity): Promise<void> {
-    const index = this._clients.findIndex(client => client.id === Entity.id)
-    this._clients[index] = Entity
+  async update(entity: ClientEntity): Promise<void> {
+    const index = this._clients.findIndex(client => client.id === entity.id)
+    this._clients[index] = entity
   }
 
   async delete(id: string): Promise<void> {

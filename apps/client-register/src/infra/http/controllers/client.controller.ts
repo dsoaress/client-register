@@ -51,7 +51,7 @@ export class ClientController implements Controller {
       async (req, res) => {
         const input = { ...req.body, ...req.params }
         await this.updateClientUseCase.execute(input)
-        res.status(httpStatusCode.OK)
+        res.status(httpStatusCode.NO_CONTENT)
       }
     )
 
@@ -60,7 +60,7 @@ export class ClientController implements Controller {
       async (req, res) => {
         const input = { ...req.body, ...req.params }
         await this.updateClientPasswordUseCase.execute(input)
-        res.status(httpStatusCode.OK)
+        res.status(httpStatusCode.NO_CONTENT)
       }
     )
 

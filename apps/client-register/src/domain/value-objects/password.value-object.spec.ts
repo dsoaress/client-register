@@ -3,9 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 import { PasswordValueObject } from './password.value-object'
 
-// TODO: corrigir os testes
-// biome-ignore lint/suspicious/noSkippedTests: <explanation>
-describe.skip('PasswordValueObject', () => {
+describe('PasswordValueObject', () => {
   it.each([
     {
       input: '',
@@ -62,7 +60,7 @@ describe.skip('PasswordValueObject', () => {
 
   it('should throw an error when updating with an incorrect current password', () => {
     const password = PasswordValueObject.create('Valid1Password*', true)
-    expect(password.update('NewValid1@Password', 'WrongCurrentPassword')).rejects.toThrowError(
+    expect(() => password.update('NewValid1@Password', 'WrongCurrentPassword')).toThrowError(
       BadRequestException
     )
   })

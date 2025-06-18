@@ -90,7 +90,7 @@ describe('ClientEntity', () => {
     const client = ClientEntity.create(validClientProps)
     const incorrectCurrentPassword = 'WrongPassword123@'
     const newPassword = 'NewSecurePassword123@'
-    expect(client.updatePassword(newPassword, incorrectCurrentPassword)).rejects.toThrowError(
+    expect(() => client.updatePassword(newPassword, incorrectCurrentPassword)).toThrowError(
       BadRequestException
     )
   })

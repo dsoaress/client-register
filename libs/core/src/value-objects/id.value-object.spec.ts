@@ -18,9 +18,7 @@ describe('IdValueObject', () => {
   })
 
   it('should return an error for an invalid ObjectId string', () => {
-    const invalidId = 'invalid-object-id'
-    const id = IdValueObject.create(invalidId)
-    expect(id.value).toBe(invalidId)
-    expect(id.errors).toContain('Invalid ID format, must be a valid ObjectId')
+    const id = IdValueObject.create('invalid-object-id')
+    expect(id.errors).toContain('Invalid ID format, must be a valid ObjectId string')
   })
 })

@@ -1,3 +1,3 @@
-import { server } from "./infra/server";
+import { server } from './infra/server'
 
-server();
+server()

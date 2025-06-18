@@ -9,7 +9,7 @@ export class UpdateClientPasswordUseCase implements UseCase<UpdateClientPassword
   async execute(input: UpdateClientPasswordInputDTO): Promise<void> {
     const client = await this.clientRepository.findById(input.id)
     if (!client) throw new NotFoundException(`Client with id ${input.id} not found`)
-    await client.updatePassword(input.newPassword, input.currentPassword)
+    client.updatePassword(input.newPassword, input.currentPassword)
     await this.clientRepository.update(client)
   }
 }

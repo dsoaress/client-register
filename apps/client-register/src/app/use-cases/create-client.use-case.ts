@@ -8,7 +8,7 @@ export class CreateClientUseCase implements UseCase<CreateClientInputDTO, void> 
   constructor(private readonly clientRepository: ClientRepository) {}
 
   async execute(input: CreateClientInputDTO): Promise<void> {
-    const client = ClientEntity.create(input)
+    const client = ClientEntity.create({ ...input, isUnhashedPassword: true })
     await this.clientRepository.create(client)
   }
 }

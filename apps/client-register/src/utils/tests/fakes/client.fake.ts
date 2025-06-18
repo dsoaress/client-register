@@ -7,6 +7,7 @@ export function clientFake(overrides: Partial<ClientEntity> = {}) {
     phone: '1234567890',
     age: 30,
     password: 'securePassword123@',
+    isUnhashedPassword: true,
     isActive: true,
     ...overrides
   })

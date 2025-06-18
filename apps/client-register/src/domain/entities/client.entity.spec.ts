@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { clientFake } from '../../utils/tests/fakes/client.fake'
 import { ClientEntity } from './client.entity'
 
-const validClientProps = clientFake().toJSON()
+const validClientProps = { ...clientFake().toJSON(), isUnhashedPassword: true }
 
 describe('ClientEntity', () => {
   it('should create a client with valid properties', () => {
@@ -77,20 +77,20 @@ describe('ClientEntity', () => {
     }).toThrowError(BadRequestException)
   })
 
-  it('should be able to update the password', async () => {
+  it('should be able to update the password', () => {
     const client = ClientEntity.create(validClientProps)
     const currentPassword = validClientProps.password
     const currentHashedPassword = client.password
     const newPassword = 'NewSecurePassword123@'
-    await client.updatePassword(newPassword, currentPassword)
+    client.updatePassword(newPassword, currentPassword)
     expect(client.password).not.toBe(currentHashedPassword)
   })
 
-  it('should throw an BadRequestError when updating the password with an incorrect current password', async () => {
+  it('should throw an BadRequestError when updating the password with an incorrect current password', () => {
     const client = ClientEntity.create(validClientProps)
     const incorrectCurrentPassword = 'WrongPassword123@'
     const newPassword = 'NewSecurePassword123@'
-    await expect(client.updatePassword(newPassword, incorrectCurrentPassword)).rejects.toThrowError(
+    expect(client.updatePassword(newPassword, incorrectCurrentPassword)).rejects.toThrowError(
       BadRequestException
     )
   })

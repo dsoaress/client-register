@@ -17,10 +17,11 @@ interface Input extends BaseEntityInputProps {
   phone: string
   age: number
   password: string
+  isUnhashedPassword: boolean
   isActive: boolean
 }
 
-interface Output extends Input {
+interface Output extends Omit<Input, 'isUnhashedPassword'> {
   id: string
   createdAt: Date
   updatedAt: Date
@@ -45,7 +46,7 @@ export class ClientEntity extends Entity<Input, Output> {
     this._email = EmailValueObject.create(props.email)
     this._phone = props.phone
     this._age = props.age
-    this._password = PasswordValueObject.create(props.password)
+    this._password = PasswordValueObject.create(props.password, props.isUnhashedPassword)
     this._isActive = props.isActive
 
     this.validate()
@@ -90,8 +91,8 @@ export class ClientEntity extends Entity<Input, Output> {
     super.updateUpdatedAt()
   }
 
-  public async updatePassword(newPassword: string, currentPassword: string): Promise<void> {
-    await this._password.update(newPassword, currentPassword)
+  public updatePassword(newPassword: string, currentPassword: string): void {
+    this._password.update(newPassword, currentPassword)
     this.validate()
   }
 

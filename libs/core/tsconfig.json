@@ -12,10 +12,6 @@
     "noEmit": true,
     "strict": true,
     "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "noFallthroughCasesInSwitch": true
   }
 }

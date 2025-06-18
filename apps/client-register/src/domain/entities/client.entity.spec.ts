@@ -1,19 +1,9 @@
-import { BadRequestException, IdValueObject } from 'core'
+import { BadRequestException } from 'core'
 import { describe, expect, it } from 'vitest'
-
+import { clientFake } from '../../utils/tests/fakes/client.fake'
 import { ClientEntity } from './client.entity'
 
-const validClientProps = {
-  id: IdValueObject.create().value,
-  name: 'John Doe',
-  email: 'john-doe@example.com',
-  phone: '1234567890',
-  age: 30,
-  password: 'securePassword123@',
-  isActive: true,
-  createdAt: new Date('2023-10-01T00:00:00Z'),
-  updatedAt: new Date('2023-10-01T00:00:00Z')
-}
+const validClientProps = clientFake().toJSON()
 
 describe('ClientEntity', () => {
   it('should create a client with valid properties', () => {

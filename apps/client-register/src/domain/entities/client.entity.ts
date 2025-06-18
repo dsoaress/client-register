@@ -20,7 +20,11 @@ interface Input extends BaseEntityInputProps {
   isActive: boolean
 }
 
-interface Output extends Input {}
+interface Output extends Input {
+  id: string
+  createdAt: Date
+  updatedAt: Date
+}
 
 export class ClientEntity extends Entity<Input, Output> {
   private readonly _name: UserNameValueObject

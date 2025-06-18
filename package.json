@@ -6,12 +6,23 @@
   "type": "module",
   "scripts": {
     "lint": "biome check --write .",
-    "lint:ci": "biome ci ."
+    "lint:ci": "biome ci .",
+    "test": "pnpm setenv:test vitest run",
+    "test:watch": "pnpm setenv:test vitest",
+    "test:ui": "pnpm setenv:test vitest --ui",
+    "clear": "pnpm --parallel clear",
+    "setenv": "dotenv -e .env.local -e .env -o --",
+    "setenv:test": "dotenv -e .env.local -e .env.test -o --"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0",
+    "@vitest/coverage-v8": "3.2.4",
+    "@vitest/ui": "3.2.4",
+    "dotenv-cli": "8.0.0",
     "lefthook": "1.11.14",
-    "rimraf": "6.0.1"
+    "rimraf": "6.0.1",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.2.4"
   },
   "engines": {
     "node": ">=22",

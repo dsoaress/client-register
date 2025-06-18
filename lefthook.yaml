@@ -4,3 +4,6 @@ pre-commit:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,json,jsonc}"
       run: npx @biomejs/biome check --write {staged_files}
       stage_fixed: true
+    test:
+      glob: "*.{js,ts}"
+      run: pnpm test

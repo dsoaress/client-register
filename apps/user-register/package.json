@@ -9,8 +9,9 @@
     "clear": "rimraf dist"
   },
   "dependencies": {
-    "express": "5.1.0",
-    "core": "workspace:core@*"
+    "bcryptjs": "3.0.2",
+    "core": "workspace:core@*",
+    "express": "5.1.0"
   },
   "devDependencies": {
     "@types/express": "5.0.3",

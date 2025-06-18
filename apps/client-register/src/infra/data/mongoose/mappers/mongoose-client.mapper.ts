@@ -5,7 +5,6 @@ import { ClientModel, type MongooseClientDocument } from '../models/client.model
 
 export const mongooseClientMapper = {
   toDomain(persistence: MongooseClientDocument): ClientEntity {
-    console.log('toDomain', persistence)
     return ClientEntity.create({
       id: persistence._id,
       name: persistence.name,

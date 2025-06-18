@@ -1,0 +1,61 @@
+@baseUrl = http://localhost:3000
+
+# @name healthCheck
+GET {{baseUrl}}/health
+
+###
+
+# @name createClient
+POST {{baseUrl}}/clients
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john-doe@example.com",
+  "phone": "1234567890",
+  "age": 30,
+  "password": "securePassword123@",
+  "isActive": true
+}
+
+###
+
+# @name getAllClients
+GET {{baseUrl}}/clients?page=1&limit=10
+
+###
+
+# @name getClientById
+GET {{baseUrl}}/clients/68533b47545dac5cf1fa5857
+
+###
+
+# @name updateClient
+PATCH {{baseUrl}}/clients/68533b47545dac5cf1fa5857
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "email": "jane-doe@example.com",
+  "phone": "10987654321",
+  "age": 28,
+  "isActive": false
+}
+
+###
+
+@name updateClientPassword
+PATCH {{baseUrl}}/clients/68533b47545dac5cf1fa5857/password
+Content-Type: application/json
+
+{
+  "currentPassword": "securePassword123@",
+  "newPassword": "newSecurePassword456@"
+}
+
+###
+
+# @name deleteClient
+DELETE {{baseUrl}}/clients/68533b19545dac5cf1fa5853
+
+###

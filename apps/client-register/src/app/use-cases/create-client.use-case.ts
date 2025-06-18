@@ -1,4 +1,5 @@
 import type { UseCase } from 'core'
+
 import { ClientEntity } from '../../domain/entities/client.entity'
 import type { CreateClientInputDTO } from '../dtos/create-client-input.dto'
 import type { ClientRepository } from '../repositories/client.repository'

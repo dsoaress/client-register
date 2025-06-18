@@ -1,4 +1,5 @@
 import type { UseCase } from 'core'
+
 import { mountPaginate } from '../../utils/mount-paginate'
 import type { GetAllClientsInputDTO } from '../dtos/get-all-clients-input.dto'
 import type { GetAllClientsOutputDTO } from '../dtos/get-all-clients-output.dto'

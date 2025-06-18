@@ -1,4 +1,5 @@
 import { BadRequestException, NotFoundException, type UseCase } from 'core'
+
 import type { DeleteClientInputDTO } from '../dtos/delete-client-input.dto'
 import type { ClientRepository } from '../repositories/client.repository'
 

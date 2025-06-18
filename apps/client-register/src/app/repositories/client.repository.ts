@@ -7,7 +7,7 @@ export interface ClientRepository extends Repository<ClientEntity> {
   findByEmail(email: string): Promise<ClientEntity | null>
   findByPhone(phone: string): Promise<ClientEntity | null>
   findAll(filters: PaginatedFiltersDTO): Promise<{ data: ClientEntity[]; total: number }>
-  create(Entity: ClientEntity): Promise<void>
-  update(Entity: ClientEntity): Promise<void>
+  create(entity: ClientEntity): Promise<void>
+  update(entity: ClientEntity): Promise<void>
   delete(id: string): Promise<void>
 }

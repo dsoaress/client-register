@@ -22,7 +22,7 @@ interface Input extends BaseEntityInputProps {
 
 interface Output extends Input {}
 
-export class UserEntity extends Entity<Input, Output> {
+export class ClientEntity extends Entity<Input, Output> {
   private readonly _name: UserNameValueObject
   private readonly _email: EmailValueObject
   // TODO: Consider using a PhoneValueObject for better validation
@@ -47,8 +47,8 @@ export class UserEntity extends Entity<Input, Output> {
     this.validate()
   }
 
-  public static create(props: Input): UserEntity {
-    return new UserEntity(props)
+  public static create(props: Input): ClientEntity {
+    return new ClientEntity(props)
   }
 
   public get name(): string {

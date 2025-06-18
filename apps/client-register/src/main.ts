@@ -8,4 +8,4 @@ app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'ok' })
 })
 
-app.listen(3000, () => console.log('User Register Service is running on port 3000'))
+app.listen(3000, () => console.log('Client Register Service is running on port 3000'))

@@ -14,12 +14,12 @@ export default defineConfig({
     include: ['**/?(*.){spec,int-spec,e2e-spec}.?(c|m)[jt]s?(x)'],
     coverage: {
       enabled: true,
-      include: ['apps/notification/src', 'apps/user-register/src', 'libs/core/src'],
+      include: ['apps/notification/src', 'apps/client-register/src', 'libs/core/src'],
       exclude: [
         '**/*.d.ts',
         '**/?(*.){spec,int-spec,e2e-spec}.?(c|m)[jt]s?(x)',
         'apps/notification/src/main.ts',
-        'apps/user-register/src/main.ts',
+        'apps/client-register/src/main.ts',
         'libs/core/src/main.ts'
       ],
       reporter: ['text', 'html', 'lcov']

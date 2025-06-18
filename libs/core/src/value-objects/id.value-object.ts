@@ -1,8 +1,7 @@
-import { randomUUID } from 'node:crypto'
+import { Types } from 'mongoose'
 
-const ID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const ERROR_MESSAGES = {
-  INVALID_ID: 'Invalid ID format, must be a valid UUID v4'
+  INVALID_ID: 'Invalid ID format, must be a valid ObjectId string'
 }
 
 export class IdValueObject {
@@ -10,7 +9,7 @@ export class IdValueObject {
   private readonly _errors: string[] = []
 
   private constructor(value?: string) {
-    this._id = value ?? randomUUID()
+    this._id = value ?? new Types.ObjectId().toString()
     this.validate()
   }
 
@@ -27,6 +26,6 @@ export class IdValueObject {
   }
 
   private validate(): void {
-    if (!ID_REGEX.test(this.value)) this._errors.push(ERROR_MESSAGES.INVALID_ID)
+    if (!Types.ObjectId.isValid(this.value)) this._errors.push(ERROR_MESSAGES.INVALID_ID)
   }
 }

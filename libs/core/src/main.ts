@@ -1,4 +1,6 @@
+export * from './base/controller'
 export * from './base/entity'
+export * from './base/http-server'
 export * from './base/repository'
 export * from './base/use-case'
 export * from './dtos/paginated-filters.dto'

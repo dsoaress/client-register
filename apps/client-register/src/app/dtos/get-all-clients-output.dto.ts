@@ -7,7 +7,6 @@ export interface GetAllClientsOutputDTO
     email: string
     phone: string
     age: number
-    password: string
     isActive: boolean
     createdAt: Date
     updatedAt: Date

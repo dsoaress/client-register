@@ -19,7 +19,8 @@ describe('GetClientByIdUseCase', () => {
     await clientRepository.create(client)
     const input = { id: client.id }
     const output = await getClientByIdUseCase.execute(input)
-    expect(output.data).toEqual(client.toJSON())
+    const { password: _, ...expectedData } = client.toJSON()
+    expect(output.data).toEqual(expectedData)
   })
 
   it('should throw NotFoundException if client does not exist', async () => {

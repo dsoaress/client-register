@@ -21,6 +21,7 @@ describe('GetAllClientsUseCase', () => {
     const output = await getAllClientsUseCase.execute(input)
 
     expect(output.data).toHaveLength(10)
+    expect(output.data[0]).not.toHaveProperty('password')
     expect(output.meta.total).toBe(15)
     expect(output.meta.totalPages).toBe(2)
     expect(output.meta.page).toBe(1)

@@ -18,6 +18,15 @@ export const mongooseClientMapper = {
       updatedAt: persistence.updatedAt
     })
   },
+  toDomainPaginated(persistence: { data: MongooseClientDocument[]; total: number }): {
+    data: ClientEntity[]
+    total: number
+  } {
+    return {
+      data: persistence.data.map(client => this.toDomain(client)),
+      total: persistence.total
+    }
+  },
   toPersistence(client: ClientEntity): Document & MongooseClientDocument {
     return new ClientModel({
       _id: client.id,

@@ -1,3 +1,4 @@
+export * from './base/cache-service'
 export * from './base/controller'
 export * from './base/entity'
 export * from './base/http-server'

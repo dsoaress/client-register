@@ -1,4 +1,4 @@
-import type { PaginatedFiltersDTO } from 'core'
+import type { CacheService, PaginatedFiltersDTO } from 'core'
 import type { Model } from 'mongoose'
 
 import type { ClientRepository } from '../../../../app/repositories/client.repository'
@@ -7,11 +7,21 @@ import { mongooseClientMapper } from '../mappers/mongoose-client.mapper'
 import type { MongooseClientDocument } from '../models/client.model'
 
 export class MongooseClientRepository implements ClientRepository {
-  constructor(private readonly clientModel: Model<MongooseClientDocument>) {}
+  constructor(
+    private readonly clientModel: Model<MongooseClientDocument>,
+    private readonly cacheService: CacheService
+  ) {}
 
   async findById(id: string): Promise<ClientEntity | null> {
+    const cachedClient = await this.cacheService.get<MongooseClientDocument>(
+      this.getClientCacheKey(id)
+    )
+    if (cachedClient) return mongooseClientMapper.toDomain(cachedClient)
+
     const client = await this.clientModel.findById(id).exec()
     if (!client) return null
+
+    await this.cacheService.set(this.getClientCacheKey(id), client)
     return mongooseClientMapper.toDomain(client)
   }
 
@@ -34,6 +44,12 @@ export class MongooseClientRepository implements ClientRepository {
     sortBy,
     sortOrder
   }: PaginatedFiltersDTO): Promise<{ data: ClientEntity[]; total: number }> {
+    const cachedClients = await this.cacheService.get<{
+      data: MongooseClientDocument[]
+      total: number
+    }>(this.getClientsCacheKey({ page, limit, search, sortBy, sortOrder }))
+    if (cachedClients) return mongooseClientMapper.toDomainPaginated(cachedClients)
+
     const query: Record<string, unknown> = {}
     sortOrder = sortOrder?.toLowerCase() === 'asc' ? 'asc' : 'desc'
     sortBy = sortBy?.toLowerCase() ?? 'createdAt'
@@ -56,23 +72,49 @@ export class MongooseClientRepository implements ClientRepository {
         .exec()
     ])
 
-    return {
-      data: clients.map(client => mongooseClientMapper.toDomain(client)),
+    await this.cacheService.set(
+      this.getClientsCacheKey({ page, limit, search, sortBy, sortOrder }),
+      { data: clients, total }
+    )
+
+    return mongooseClientMapper.toDomainPaginated({
+      data: clients,
       total
-    }
+    })
   }
 
   async create(entity: ClientEntity): Promise<void> {
     const client = mongooseClientMapper.toPersistence(entity)
     await client.save()
+    await Promise.all([
+      this.cacheService.set(this.getClientCacheKey(client._id), client),
+      this.cacheService.remove(this.getClientsCacheKey())
+    ])
   }
 
   async update(entity: ClientEntity): Promise<void> {
     const client = mongooseClientMapper.toPersistence(entity)
-    await this.clientModel.updateOne({ _id: client.id }, client).exec()
+    await this.clientModel.updateOne({ _id: client._id }, client).exec()
+    await Promise.all([
+      this.cacheService.set(this.getClientCacheKey(client._id), client),
+      this.cacheService.remove(this.getClientsCacheKey())
+    ])
   }
 
   async delete(id: string): Promise<void> {
     await this.clientModel.findByIdAndDelete(id).exec()
+    await Promise.all([
+      this.cacheService.remove(this.getClientCacheKey(id)),
+      this.cacheService.remove(this.getClientsCacheKey())
+    ])
+  }
+
+  private getClientCacheKey(id: string): string {
+    return `client:${id}`
+  }
+
+  private getClientsCacheKey(filters?: PaginatedFiltersDTO): string {
+    if (!filters) return 'clients'
+    return `clients:page:${filters.page}:limit:${filters.limit}:search:${filters.search}:sortBy:${filters.sortBy}:sortOrder:${filters.sortOrder}`
   }
 }

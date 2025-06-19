@@ -2,6 +2,7 @@ import { connect } from 'mongoose'
 
 import type { ClientRepository } from '../../../app/repositories/client.repository'
 import { env } from '../../config/env'
+import { logger } from '../../config/logger'
 import { ClientModel } from './models/client.model'
 import { MongooseClientRepository } from './repositories/mongoose-client.repository'
 
@@ -17,9 +18,9 @@ export function mongooseModule(): Output {
         appName: 'client-register',
         dbName: 'client-register'
       })
-      console.info('Connected to MongoDB')
+      logger.info('Connected to MongoDB')
     } catch (error) {
-      console.error('Error connecting to MongoDB:', error)
+      logger.error('Error connecting to MongoDB:', error)
       throw new Error('Failed to connect to MongoDB')
     }
   }

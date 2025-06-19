@@ -14,8 +14,10 @@
     "core": "workspace:core@*",
     "cors": "2.8.5",
     "express": "5.1.0",
+    "express-winston": "4.2.0",
     "mongoose": "8.16.0",
     "swagger-ui-express": "5.0.1",
+    "winston": "3.17.0",
     "yaml": "2.8.0"
   },
   "devDependencies": {

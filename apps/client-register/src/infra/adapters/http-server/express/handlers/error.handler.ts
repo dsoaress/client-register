@@ -1,6 +1,8 @@
 import { BadRequestException, ConflictException, httpStatusCode, NotFoundException } from 'core'
 import type { Response } from 'express'
 
+import { logger } from '../../../../config/logger'
+
 export function errorHandler(error: unknown, res: Response): void {
   switch (true) {
     case error instanceof BadRequestException:
@@ -13,7 +15,7 @@ export function errorHandler(error: unknown, res: Response): void {
       res.status(httpStatusCode.CONFLICT).json({ error: error.message })
       break
     default:
-      console.error('Unexpected error:', error)
+      logger.error('Unexpected error:', error)
       res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({ error: 'Internal Server Error' })
   }
 }

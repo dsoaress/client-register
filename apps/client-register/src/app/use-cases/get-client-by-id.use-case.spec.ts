@@ -1,5 +1,6 @@
-import { NotFoundException } from 'core'
+import { IdValueObject, NotFoundException } from 'core'
 import { beforeEach, describe, expect, it } from 'vitest'
+
 import { clientFake } from '../../utils/tests/fakes/client.fake'
 import { InMemoryClientRepository } from '../../utils/tests/in-memory-repositories/in-memory-client.repository'
 import type { ClientRepository } from '../repositories/client.repository'
@@ -24,7 +25,7 @@ describe('GetClientByIdUseCase', () => {
   })
 
   it('should throw NotFoundException if client does not exist', async () => {
-    const input = { id: 'non-existing-id' }
+    const input = { id: IdValueObject.create().value }
     await expect(getClientByIdUseCase.execute(input)).rejects.toThrowError(NotFoundException)
   })
 })

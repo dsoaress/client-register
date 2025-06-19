@@ -1,4 +1,4 @@
-const NAME_REGEX = /^[a-zA-ZÀ-ÿ\s]+$/
+const NAME_REGEX = /^[a-zA-ZÀ-ÿ\s'-.]+$/
 const MIN_LENGTH = 3
 const MAX_LENGTH = 255
 const ERROR_MESSAGES = {

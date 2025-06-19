@@ -3,7 +3,7 @@ import type { Handler, HttpServer } from 'core'
 import type { Express } from 'express'
 
 import { handleRequest } from './handlers/request.handler'
-import { setup } from './handlers/setup'
+import { setup } from './setup'
 
 export class ExpressHttpServerAdapter implements HttpServer {
   constructor(private readonly server: Express) {

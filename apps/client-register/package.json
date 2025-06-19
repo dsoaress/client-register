@@ -6,6 +6,7 @@
     "dev": "tsx watch --clear-screen=false src/main.ts",
     "build": "tsc && tsup",
     "start": "node dist/main.js",
+    "seed": "tsx scripts/seed.ts",
     "clear": "rimraf dist"
   },
   "dependencies": {
@@ -13,12 +14,16 @@
     "core": "workspace:core@*",
     "cors": "2.8.5",
     "express": "5.1.0",
-    "mongoose": "8.16.0"
+    "mongoose": "8.16.0",
+    "swagger-ui-express": "5.0.1",
+    "yaml": "2.8.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "9.8.0",
     "@types/cors": "2.8.19",
     "@types/express": "5.0.3",
     "@types/node": "24.0.3",
+    "@types/swagger-ui-express": "4.1.8",
     "tsup": "8.5.0",
     "tsx": "4.20.3",
     "typescript": "5.8.3"

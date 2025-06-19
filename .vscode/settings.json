@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["Unhashed"],
+  "cSpell.words": ["addgroup", "adduser", "openapi", "tsup", "Unhashed"],
   "symbols.files.associations": {
     "vitest.environment.ts": "vitest",
     "vitest.setup.ts": "vitest",

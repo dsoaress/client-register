@@ -12,13 +12,12 @@
     "build": "tsc && tsup",
     "clear": "rimraf dist"
   },
+  "dependencies": {
+    "mongoose": "8.16.0"
+  },
   "devDependencies": {
     "@types/node": "24.0.3",
-    "mongoose": "8.16.0",
     "tsup": "8.5.0",
     "typescript": "5.8.3"
-  },
-  "peerDependencies": {
-    "mongoose": "8"
   }
 }

@@ -11,6 +11,7 @@
     "build:client": "pnpm build:core && pnpm --filter client-register build",
     "build:notification": "pnpm build:core && pnpm --filter notification build",
     "build:core": "pnpm --filter core build",
+    "start": "docker compose up --build",
     "start:client": "pnpm --filter client-register start",
     "start:notification": "pnpm --filter notification start",
     "seed": "pnpm setenv pnpm --filter client-register seed",
@@ -21,7 +22,8 @@
     "test:ui": "pnpm setenv:test vitest --ui",
     "clear": "pnpm --parallel clear",
     "setenv": "dotenv -e .env.local -e .env -o --",
-    "setenv:test": "dotenv -e .env.local -e .env.test -o --"
+    "setenv:test": "dotenv -e .env.local -e .env.test -o --",
+    "compose:up": "docker compose up client-register-mongodb client-register-redis -d"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0",

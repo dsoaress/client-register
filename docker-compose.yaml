@@ -1,0 +1,50 @@
+services:
+  client-register-mongodb:
+    image: mongo:latest
+    container_name: client-register-mongodb
+    restart: unless-stopped
+    ports:
+      - 27020:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongodb
+      MONGO_INITDB_ROOT_PASSWORD: mongodb
+    volumes:
+      - client-register-mongodb-data:/data/db
+    networks:
+      - clients-network
+
+  client-register-redis:
+    image: redis:latest
+    container_name: client-register-redis
+    restart: unless-stopped
+    ports:
+      - 6381:6379
+    volumes:
+      - client-register-redis:/data
+    networks:
+      - clients-network
+
+  client-register:
+    build:
+      context: .
+      dockerfile: apps/client-register/Dockerfile
+    container_name: client-register
+    restart: unless-stopped
+    depends_on:
+      - client-register-mongodb
+      - client-register-redis
+    env_file:
+      - .env.docker
+      # - .env # Uncomment if you have a .env file
+    ports:
+      - 3000:3000
+    networks:
+      - clients-network
+
+volumes:
+  client-register-mongodb-data:
+  client-register-redis:
+
+networks:
+  clients-network:
+    driver: bridge

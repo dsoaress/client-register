@@ -114,13 +114,14 @@ importers:
         version: 5.8.3
 
   libs/core:
+    dependencies:
+      mongoose:
+        specifier: 8.16.0
+        version: 8.16.0
     devDependencies:
       '@types/node':
         specifier: 24.0.3
         version: 24.0.3
-      mongoose:
-        specifier: 8.16.0
-        version: 8.16.0
       tsup:
         specifier: 8.5.0
         version: 8.5.0(postcss@8.5.6)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.8.0)

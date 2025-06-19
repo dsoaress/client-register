@@ -1,6 +1,7 @@
 import { connect } from 'mongoose'
 
 import type { ClientRepository } from '../../../app/repositories/client.repository'
+import { env } from '../../config/env'
 import { ClientModel } from './models/client.model'
 import { MongooseClientRepository } from './repositories/mongoose-client.repository'
 
@@ -12,7 +13,7 @@ interface Output {
 export function mongooseModule(): Output {
   const connectDatabase = async () => {
     try {
-      connect('mongodb://mongodb:mongodb@localhost:27017', {
+      connect(env.DATABASE_URL, {
         appName: 'client-register',
         dbName: 'client-register'
       })

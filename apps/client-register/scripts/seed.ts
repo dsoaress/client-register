@@ -5,26 +5,30 @@ import { PasswordValueObject } from '../src/domain/value-objects/password.value-
 import { mongooseClientMapper } from '../src/infra/data/mongoose/mappers/mongoose-client.mapper'
 import { mongooseModule } from '../src/infra/data/mongoose/mongoose.module'
 
-const data = Array.from({ length: 100 }, () =>
-  mongooseClientMapper.toDomain({
-    _id: IdValueObject.create().value,
-    name: faker.person.fullName(),
-    phone: faker.phone.number(),
-    age: faker.number.int({ min: 18, max: 65 }),
-    email: faker.internet.email().toLowerCase(),
-    password: PasswordValueObject.create('SecurePassword123@', true).value,
-    isActive: faker.datatype.boolean(),
-    createdAt: faker.date.past(),
-    updatedAt: faker.date.recent()
-  })
-)
+const LENGTH = 100
 
 const { clientRepository, connectDatabase } = mongooseModule()
 
 async function seedDatabase() {
+  console.info(`Seeding database with ${LENGTH} clients...`)
   await connectDatabase()
+
+  const data = Array.from({ length: LENGTH }, () =>
+    mongooseClientMapper.toDomain({
+      _id: IdValueObject.create().value,
+      name: faker.person.fullName(),
+      phone: faker.phone.number(),
+      age: faker.number.int({ min: 18, max: 65 }),
+      email: faker.internet.email().toLowerCase(),
+      password: PasswordValueObject.create('SecurePassword123@', true).value,
+      isActive: faker.datatype.boolean(),
+      createdAt: faker.date.past(),
+      updatedAt: faker.date.recent()
+    })
+  )
+
   await Promise.all(data.map(clientRepository.create))
-  console.info('Database seeded successfully with 100 clients.')
+  console.info(`Database seeded successfully with ${LENGTH} clients.`)
 }
 
 seedDatabase()

@@ -1,0 +1,18 @@
+const { CLIENT_REGISTER_SERVER_PORT, CLIENT_REGISTER_DATABASE_URL, CLIENT_REGISTER_REDIS_URL } =
+  process.env
+
+if (!CLIENT_REGISTER_DATABASE_URL) {
+  throw new Error('Missing environment variable: CLIENT_REGISTER_DATABASE_URL')
+}
+
+if (!CLIENT_REGISTER_REDIS_URL) {
+  throw new Error('Missing environment variable: CLIENT_REGISTER_REDIS_URL')
+}
+
+const env = {
+  SERVER_PORT: parseInt(CLIENT_REGISTER_SERVER_PORT ?? '3000', 10),
+  DATABASE_URL: CLIENT_REGISTER_DATABASE_URL,
+  REDIS_URL: CLIENT_REGISTER_REDIS_URL
+}
+
+export { env }

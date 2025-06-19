@@ -1,3 +1,15 @@
 {
-  "cSpell.words": ["Unhashed"]
+  "cSpell.words": ["Unhashed"],
+  "symbols.files.associations": {
+    "vitest.environment.ts": "vitest",
+    "vitest.setup.ts": "vitest",
+    "vitest.workspace.ts": "vitest",
+    "*.module.ts": "ts",
+    "*.service.ts": "ts",
+    "*.e2e-spec.ts": "ts-test",
+    "*.int-spec.ts": "ts-test",
+    "*.spec.ts": "ts-test",
+    ".env.example": "gear",
+    ".env.docker": "gear"
+  }
 }

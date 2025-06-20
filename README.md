@@ -41,7 +41,7 @@ Após isso:
 > Existe um script para "seed" inicial, que popula o banco de dados com alguns clientes de exemplo. Para executá-lo, use:
 
 ```bash
-# Certifique-se de que o MongoDB e o Redis estão rodando
+# Certifique-se de que o MongoDB e o Redis estejam rodando
 pnpm seed
 ```
 

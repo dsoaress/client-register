@@ -94,6 +94,21 @@ pnpm test:ui
 
 ![Coverage Report](.github/cov.png "Coverage Report")
 
+## Funcionalidades implementadas
+
+- Cadastro de clientes com validações de campos
+- Listagem de clientes com paginação, ordenação e busca
+- Busca de cliente por ID
+- Atualização de dados do cliente (parcial)
+- Atualização de senha do cliente
+- Exclusão de cliente
+- Integração com Redis para cache de listagem de clientes
+- Integração com Kafka para notificações assíncronas
+- Documentação da API com Swagger
+- Testes unitários e de ponta a ponta (end-to-end)
+
+![Logs](.github/logs.png "Logs")
+
 ## 🏗️ Arquitetura do projeto
 
 O projeto segue os princípios da **Clean Architecture**, separando bem as responsabilidades entre as camadas. Estrutura principal:

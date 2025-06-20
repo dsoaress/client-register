@@ -3,10 +3,7 @@ import winston from 'winston'
 export const loggerConfig = {
   transports: [new winston.transports.Console()],
   level: 'info',
-  format: winston.format.prettyPrint({
-    colorize: true,
-    depth: 3
-  }),
+  format: winston.format.json(),
   meta: true
 }
 

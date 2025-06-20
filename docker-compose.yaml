@@ -29,7 +29,7 @@ services:
       # - .env # Uncomment if you have a .env file
     network_mode: host
   client-register-mongodb:
-    image: mongo:7-jammy
+    image: mongo:latest
     container_name: client-register-mongodb
     restart: unless-stopped
     ports:

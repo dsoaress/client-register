@@ -52,7 +52,7 @@ export class MongooseClientRepository implements ClientRepository {
 
     const query: Record<string, unknown> = {}
     sortOrder = sortOrder?.toLowerCase() === 'asc' ? 'asc' : 'desc'
-    sortBy = sortBy?.toLowerCase() ?? 'createdAt'
+    sortBy = sortBy ?? 'createdAt'
 
     if (search) {
       query.$or = [
@@ -115,6 +115,6 @@ export class MongooseClientRepository implements ClientRepository {
 
   private getClientsCacheKey(filters?: PaginatedFiltersDTO): string {
     if (!filters) return 'clients'
-    return `clients:page:${filters.page}:limit:${filters.limit}:search:${filters.search}:sortBy:${filters.sortBy}:sortOrder:${filters.sortOrder}`
+    return `clients:page:${filters.page}:limit:${filters.limit}:sortBy:${filters.sortBy}:sortOrder:${filters.sortOrder}:search:${filters.search}`
   }
 }

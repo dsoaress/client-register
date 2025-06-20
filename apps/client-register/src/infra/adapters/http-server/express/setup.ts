@@ -9,12 +9,16 @@ import { healthCheckHandler } from './handlers/health-check.handler'
 import { loggerHandler } from './handlers/logger.handler'
 
 export function setup(server: Express): void {
-  const swaggerFilePath = resolve(process.cwd(), 'openapi.yaml')
-  const swaggerDocument = YAML.parse(readFileSync(swaggerFilePath, 'utf8'))
-
   server.use(cors({ origin: '*' }))
   server.use(json())
   server.use(loggerHandler)
-  server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
   server.get('/health', healthCheckHandler)
+
+  try {
+    const swaggerFilePath = resolve(process.cwd(), 'openapi.yaml')
+    const swaggerDocument = YAML.parse(readFileSync(swaggerFilePath, 'utf8'))
+    server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+  } catch {
+    // do nothing if the file is not found
+  }
 }

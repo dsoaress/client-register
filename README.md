@@ -85,6 +85,8 @@ pnpm test:watch
 pnpm test:ui
 ```
 
+![Coverage Report](.github/cov.png "Coverage Report")
+
 ## 🏗️ Arquitetura do projeto
 
 O projeto segue os princípios da **Clean Architecture**, separando bem as responsabilidades entre as camadas. Estrutura principal:

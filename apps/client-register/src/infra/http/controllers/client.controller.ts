@@ -68,7 +68,7 @@ export class ClientController implements Controller {
           ...client,
           action: EVENT_ACTIONS.CLIENT.UPDATED
         })
-        res.status(httpStatusCode.NO_CONTENT)
+        res.status(httpStatusCode.NO_CONTENT).send()
       }
     )
 

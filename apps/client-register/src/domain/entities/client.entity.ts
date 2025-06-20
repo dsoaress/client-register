@@ -30,7 +30,6 @@ interface Output extends Omit<Input, 'isUnhashedPassword'> {
 export class ClientEntity extends Entity<Input, Output> {
   private readonly _name: UserNameValueObject
   private readonly _email: EmailValueObject
-  // TODO: create a PhoneValueObject
   private _phone: string
   private _age: number
   private readonly _password: PasswordValueObject

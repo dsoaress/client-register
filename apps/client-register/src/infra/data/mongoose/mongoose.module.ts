@@ -8,6 +8,7 @@ import { MongooseClientRepository } from './repositories/mongoose-client.reposit
 
 interface Input {
   cacheService: CacheService
+  databaseUrl?: string
 }
 
 interface Output {
@@ -15,10 +16,10 @@ interface Output {
   clientRepository: ClientRepository
 }
 
-export function mongooseModule({ cacheService }: Input): Output {
+export function mongooseModule({ cacheService, databaseUrl }: Input): Output {
   const connectDatabase = async () => {
     try {
-      connect(env.DATABASE_URL, {
+      await connect(databaseUrl ?? env.DATABASE_URL, {
         appName: env.APP_NAME,
         dbName: env.APP_NAME
       })

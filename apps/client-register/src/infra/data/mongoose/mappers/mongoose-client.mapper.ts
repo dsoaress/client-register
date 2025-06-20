@@ -14,8 +14,8 @@ export const mongooseClientMapper = {
       password: persistence.password,
       isUnhashedPassword: false,
       isActive: persistence.isActive,
-      createdAt: persistence.createdAt,
-      updatedAt: persistence.updatedAt
+      createdAt: new Date(persistence.createdAt),
+      updatedAt: new Date(persistence.updatedAt)
     })
   },
   toDomainPaginated(persistence: { data: MongooseClientDocument[]; total: number }): {

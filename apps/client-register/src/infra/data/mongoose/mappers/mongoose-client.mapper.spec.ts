@@ -22,6 +22,30 @@ describe('mongooseClientMapper', () => {
     expect(persistence.updatedAt).toEqual(clientEntity.updatedAt)
   })
 
+  it('should map a list of MongooseClientDocument to ClientEntity', () => {
+    const persistenceList = [
+      {
+        ...validClientProps,
+        _id: IdValueObject.create().value,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        ...validClientProps,
+        _id: IdValueObject.create().value,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ]
+    const clientEntities = mongooseClientMapper.toDomainPaginated({
+      data: persistenceList,
+      total: persistenceList.length
+    })
+    expect(clientEntities.data.length).toBe(2)
+    expect(clientEntities.data[0].id).toBe(persistenceList[0]._id)
+    expect(clientEntities.data[0].name).toBe(persistenceList[0].name)
+  })
+
   it('should map MongooseClientDocument to ClientEntity with correct properties', () => {
     const persistence = {
       ...validClientProps,

@@ -23,7 +23,8 @@ export async function handleRequest<T>(
         return httpResponse
       },
       send: data => {
-        res.send(data)
+        if (!data) res.end()
+        else res.send(data)
       }
     }
 

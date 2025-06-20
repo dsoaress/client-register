@@ -30,6 +30,6 @@ export interface HttpRequest<T> {
 }
 
 export interface HttpResponse {
-  send: (data: { data: unknown }) => void
+  send: (data?: { data: unknown }) => void
   status: (code: number) => HttpResponse
 }

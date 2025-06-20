@@ -38,6 +38,13 @@ Após isso:
 - A documentação da API (Swagger) estará em:  
   [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
+> Existe um script para "seed" inicial, que popula o banco de dados com alguns clientes de exemplo. Para executá-lo, use:
+
+```bash
+# Certifique-se de que o MongoDB e o Redis estão rodando
+pnpm seed
+```
+
 ## 🛠️ Como rodar localmente (modo manual / completo)
 
 ### Pré-requisitos

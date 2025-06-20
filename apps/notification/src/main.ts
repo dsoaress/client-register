@@ -1,11 +1,3 @@
-import express from 'express'
+import { server } from './infra/server'
 
-const app = express()
-
-app.use(express.json())
-
-app.get('/health', (_req, res) => {
-  res.status(200).json({ status: 'ok' })
-})
-
-app.listen(3001, () => console.log('Notification Service is running on port 3001'))
+server()

@@ -23,7 +23,7 @@
     "clear": "pnpm --parallel clear",
     "setenv": "dotenv -e .env.local -e .env -o --",
     "setenv:test": "dotenv -e .env.local -e .env.test -o --",
-    "compose:up": "docker compose up client-register-mongodb client-register-redis -d"
+    "compose:up": "docker compose up client-register-mongodb client-register-redis kafka -d"
   },
   "devDependencies": {
     "@biomejs/biome": "2.0.0",

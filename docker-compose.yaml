@@ -1,4 +1,33 @@
 services:
+  client-register:
+    build:
+      context: .
+      dockerfile: apps/client-register/Dockerfile
+    container_name: client-register
+    restart: unless-stopped
+    depends_on:
+      - client-register-mongodb
+      - client-register-redis
+      - kafka
+    env_file:
+      - .env.local
+      # - .env # Uncomment if you have a .env file
+    ports:
+      - 3000:3000
+    network_mode: host
+
+  notification:
+    build:
+      context: .
+      dockerfile: apps/notification/Dockerfile
+    container_name: notification
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    env_file:
+      - .env.local
+      # - .env # Uncomment if you have a .env file
+    network_mode: host
   client-register-mongodb:
     image: mongo:latest
     container_name: client-register-mongodb
@@ -10,8 +39,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: mongodb
     volumes:
       - client-register-mongodb-data:/data/db
-    networks:
-      - clients-network
 
   client-register-redis:
     image: redis:latest
@@ -21,30 +48,33 @@ services:
       - 6381:6379
     volumes:
       - client-register-redis:/data
-    networks:
-      - clients-network
 
-  client-register:
-    build:
-      context: .
-      dockerfile: apps/client-register/Dockerfile
-    container_name: client-register
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.4
+    container_name: zookeeper
+    restart: unless-stopped
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    container_name: kafka
     restart: unless-stopped
     depends_on:
-      - client-register-mongodb
-      - client-register-redis
-    env_file:
-      - .env.docker
-      # - .env # Uncomment if you have a .env file
+      - zookeeper
     ports:
-      - 3000:3000
-    networks:
-      - clients-network
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 volumes:
   client-register-mongodb-data:
   client-register-redis:
-
-networks:
-  clients-network:
-    driver: bridge

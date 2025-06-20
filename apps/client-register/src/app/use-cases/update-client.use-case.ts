@@ -2,13 +2,14 @@ import { ConflictException, NotFoundException, type UseCase } from 'core'
 
 import type { ClientEntity } from '../../domain/entities/client.entity'
 import { validateId } from '../../utils/validate-id'
+import type { ClientOutputDTO } from '../dtos/client-output.dto'
 import type { UpdateClientInputDTO } from '../dtos/update-client-input.dto'
 import type { ClientRepository } from '../repositories/client.repository'
 
-export class UpdateClientUseCase implements UseCase<UpdateClientInputDTO, void> {
+export class UpdateClientUseCase implements UseCase<UpdateClientInputDTO, ClientOutputDTO> {
   constructor(private readonly clientRepository: ClientRepository) {}
 
-  async execute(input: UpdateClientInputDTO): Promise<void> {
+  async execute(input: UpdateClientInputDTO): Promise<ClientOutputDTO> {
     validateId(input.id)
     const [client] = await Promise.all([
       this.validateClientExists(input.id),
@@ -17,6 +18,7 @@ export class UpdateClientUseCase implements UseCase<UpdateClientInputDTO, void> 
     ])
     client.update(input)
     await this.clientRepository.update(client)
+    return client.toJSON()
   }
 
   private async validateClientExists(id: string): Promise<ClientEntity> {

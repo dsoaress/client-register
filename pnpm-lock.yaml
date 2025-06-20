@@ -50,6 +50,9 @@ importers:
       ioredis:
         specifier: 5.6.1
         version: 5.6.1
+      kafkajs:
+        specifier: 2.2.4
+        version: 2.2.4
       mongoose:
         specifier: 8.16.0
         version: 8.16.0
@@ -93,13 +96,13 @@ importers:
       core:
         specifier: workspace:core@*
         version: link:../../libs/core
-      express:
-        specifier: 5.1.0
-        version: 5.1.0
+      kafkajs:
+        specifier: 2.2.4
+        version: 2.2.4
+      winston:
+        specifier: 3.17.0
+        version: 3.17.0
     devDependencies:
-      '@types/express':
-        specifier: 5.0.3
-        version: 5.0.3
       '@types/node':
         specifier: 24.0.3
         version: 24.0.3
@@ -1038,6 +1041,10 @@ packages:
 
   js-tokens@9.0.1:
     resolution: {integrity: sha512-mxa9E9ITFOt0ban3j6L5MpjwegGz6lBQmM1IJkWeBZGcMxto50+eWdjC/52xDbS2vy0k7vIMK0Fe2wfL9OQSpQ==}
+
+  kafkajs@2.2.4:
+    resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
+    engines: {node: '>=14.0.0'}
 
   kareem@2.6.3:
     resolution: {integrity: sha512-C3iHfuGUXK2u8/ipq9LfjFfXFxAZMQJJq7vLS45r3D9Y2xQ/m4S8zaR4zMLFWh9AsNPXmcFfUDhTEO8UIC/V6Q==}
@@ -2606,6 +2613,8 @@ snapshots:
   joycon@3.1.1: {}
 
   js-tokens@9.0.1: {}
+
+  kafkajs@2.2.4: {}
 
   kareem@2.6.3: {}
 

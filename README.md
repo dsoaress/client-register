@@ -21,7 +21,13 @@ A aplicação utiliza o framework **Express** e implementa uma arquitetura em ca
 Se você já possui o Docker instalado, basta executar:
 
 ```bash
-docker-compose up --build
+docker compose up --build -d
+```
+
+Para acessar os logs das aplicações, você pode usar:
+
+```bash
+docker compose logs -f client-register notification
 ```
 
 Após isso:

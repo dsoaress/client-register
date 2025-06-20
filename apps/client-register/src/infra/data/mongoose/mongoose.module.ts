@@ -19,8 +19,8 @@ export function mongooseModule({ cacheService }: Input): Output {
   const connectDatabase = async () => {
     try {
       connect(env.DATABASE_URL, {
-        appName: 'client-register',
-        dbName: 'client-register'
+        appName: env.APP_NAME,
+        dbName: env.APP_NAME
       })
       logger.info('Connected to MongoDB')
     } catch (error) {
